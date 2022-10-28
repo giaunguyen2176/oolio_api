@@ -1,0 +1,45 @@
+version: "3.7"
+
+networks:
+  oolio_api:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:13.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - 8432:5432
+    volumes:
+      - ./data/postgresql:/data
+    networks:
+      - oolio_api
+
+  app:
+    build:
+      context: ./
+    working_dir: /src
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_PASS=${DB_PASS}
+      - DB_USER=${DB_USER}
+      - DB_NAME=${DB_NAME}
+    ports:
+      - 8000:3000
+    command: npm run dev
+    volumes:
+      - ./:/src
+      - ./data/bundle:/bundle
+    stdin_open: true
+    tty: true
+    networks:
+      - oolio_api
+    depends_on:
+      - postgres
+

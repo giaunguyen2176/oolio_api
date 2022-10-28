@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+.github
+data
+ops
+.editorconfig
+docker-compose.yml
