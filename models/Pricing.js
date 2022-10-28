@@ -9,6 +9,10 @@ const discountForXGetYForZ = function(items, discountCode) {
   // Count number of applicable products
   const discountItem = items.find((item) => item.product.id === productId);
 
+  if (!discountItem) {
+    return 0;
+  }
+
   // Check if enough required count, floor to avoid decimal value like 0.6, 0.8
   let unchargedCount = Math.floor(discountItem.quantity / requiredCount);
   if (unchargedCount === 0) {
@@ -26,6 +30,10 @@ const discountNewPriceOnXValueY = function(items, discountCode) {
   // Count number of applicable products
   const discountItem = items.find((item) => item.product.id === productId);
 
+  if (!discountItem) {
+    return 0;
+  }
+
   const originalPrice = discountItem.product.price;
   const quantity = discountItem.quantity;
 
@@ -34,8 +42,7 @@ const discountNewPriceOnXValueY = function(items, discountCode) {
 }
 
 module.exports = function(items, discountCode) {
-    // For every discount type, implement its own logic here
-  console.log(discountCode.type);
+  // For every discount type, implement its own logic here
   switch (discountCode.type) {
     case FOR_X_GET_Y_FOR_Z:
       this.discountValue = discountForXGetYForZ(items, discountCode);

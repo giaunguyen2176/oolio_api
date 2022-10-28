@@ -10,7 +10,6 @@ module.exports = function (items, codes) {
   // With each code, deduct the discount amount from the total to get final total
   codes.forEach((code) => {
     const discountCode = DiscountCode.findOne(code);
-    console.log(1, discountCode);
     if (!discountCode) {
       return;
     }
