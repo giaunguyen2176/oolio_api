@@ -5,5 +5,5 @@ function index(req, res) {
 }
 
 module.exports = {
-  index: index
+  index
 };

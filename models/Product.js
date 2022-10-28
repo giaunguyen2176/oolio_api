@@ -3,7 +3,7 @@ let products = [
     id: 1,
     name: 'Small pizza',
     description: 'Small size pizza with cheese',
-    price: 12.99
+    price: 11.99
   },
   {
     id: 2,
