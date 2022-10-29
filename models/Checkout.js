@@ -3,9 +3,9 @@ const DiscountCode = require('./DiscountCode');
 
 module.exports = function (items, codes) {
   // Calculate total of all products
-  this.total = Math.round(items.reduce((accumulator, item) => {
+  this.total = items.reduce((accumulator, item) => {
     return accumulator + item.product.price * item.quantity;
-  }, 0) * 100) / 100;
+  }, 0);
 
   // With each code, deduct the discount amount from the total to get final total
   codes.forEach((code) => {
@@ -16,4 +16,6 @@ module.exports = function (items, codes) {
     const pricing = new Pricing(items, discountCode);
     this.total -= pricing.discountValue;
   });
+
+  this.total = Math.round(this.total * 100) / 100;
 };

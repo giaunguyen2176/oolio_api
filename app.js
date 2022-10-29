@@ -1,7 +1,5 @@
 // load env
 require('dotenv').config();
-// init db
-require('./models/bookshelf');
 
 let createError = require('http-errors');
 let express = require('express');
